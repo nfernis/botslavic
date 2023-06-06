@@ -12,14 +12,20 @@ class TelegramWebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         # Ваш код обработки входящего веб-хука от Telegram
         pass
-#ДЛЯ VERCEL
+
+#ДЛЯ VERCEL  
 bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
 dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 
 
-
-
+#ДЛЯ VERCEL  
+@dp.webhook_handler()
+async def handle_webhook(event: types.WebhookRequest):
+    # Ваш код обработки входящего веб-хука от Telegram
+    pas
+handler = WebhookRequestHandler(dispatcher=dp)
+#ДЛЯ VERCEL    
 #ПРИВЕТСТВИЕ 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
@@ -73,9 +79,15 @@ async def process_start_command(message: types.Message):
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=False)
+    #ДЛЯ VERCEL
+    import asyncio
+    from aiohttp import web
+    app = web.Application()
+    app.router.add_route('*', '/path_to_webhook', handler.handle)
+    web.run_app(app, host='localhost', port=8000)
+    #ДЛЯ VERCEL
 keep_alive()#запускаем flask-сервер в отдельном потоке
 bot.polling(non_stop=True, interval=0) #запуск бота
-#ДЛЯ VERCEL
-server = HTTPServer(('', 8000), TelegramWebhookHandler)
-server.serve_forever()
-#ДЛЯ VERCEL
+
+
+
