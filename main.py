@@ -11,7 +11,7 @@ bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
 dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 
-#ЭЙ
+
 
 #ПРИВЕТСТВИЕ 
 @dp.message_handler(commands=['start'])
