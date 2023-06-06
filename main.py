@@ -11,7 +11,7 @@ bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
 dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 
-
+#ЭЙ
 
 #ПРИВЕТСТВИЕ 
 @dp.message_handler(commands=['start'])
@@ -34,7 +34,7 @@ async def process_start_command(message: types.Message):
     text = f.read()
   start_index = text.find(str(dayNow))  # Находим индекс начала подстроки
   end_index = text.find('/'+dayNow)  # Находим индекс конца подстроки
-  result = text[start_index+4:end_index]# Извлекаем подстроку
+  result = text[start_index+5:end_index]# Извлекаем подстроку
   #СЛЕДУЮЩИЙ ПРАЗДНИК
   nextHolyday = -1
   nextDay = int(dayNow[1:len(dayNow)])%10 + 1
@@ -55,7 +55,7 @@ async def process_start_command(message: types.Message):
     await message.reply(f"Сегодня нет никаких праздников:)")
     start_index = text.find(str(nextHolyday))  # Находим индекс начала подстроки
     end_index = text.find('/'+nextHolyday)  # Находим индекс конца подстроки
-    await message.reply(f"Следующий праздник: {text[start_index+4:end_index]}")
+    await message.reply(f"Следующий праздник: {text[start_index+5:end_index]}")
   else:
     await message.reply(f"{result}")
 
