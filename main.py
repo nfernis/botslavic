@@ -6,10 +6,17 @@ from aiogram import Bot, Dispatcher, types, executor
 import time
 import schedule
 import datetime
-
+#ДЛЯ VERCEL
+from http.server import BaseHTTPRequestHandler, HTTPServer
+class TelegramWebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        # Ваш код обработки входящего веб-хука от Telegram
+        pass
+#ДЛЯ VERCEL
 bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
 dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
+
 
 
 
@@ -30,7 +37,7 @@ async def process_start_command(message: types.Message):
 @dp.message_handler(commands=['holiday'])
 async def process_start_command(message: types.Message):
   dayNow = 'q' + str(datetime.datetime.now().day) +       str(datetime.datetime.now().month)
-  with open('holyday.txt') as f:
+  with open('holyday.txt', encoding='utf-8') as f:
     text = f.read()
   start_index = text.find(str(dayNow))  # Находим индекс начала подстроки
   end_index = text.find('/'+dayNow)  # Находим индекс конца подстроки
@@ -68,3 +75,7 @@ if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=False)
 keep_alive()#запускаем flask-сервер в отдельном потоке
 bot.polling(non_stop=True, interval=0) #запуск бота
+#ДЛЯ VERCEL
+server = HTTPServer(('', 8000), TelegramWebhookHandler)
+server.serve_forever()
+#ДЛЯ VERCEL
