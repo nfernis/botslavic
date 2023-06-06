@@ -12,6 +12,10 @@ class TelegramWebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         # Ваш код обработки входящего веб-хука от Telegram
         pass
+@dp.webhook_handler()
+async def handle_webhook(event: types.WebhookRequest):
+    # Ваш код обработки входящего веб-хука от Telegram
+    pass
 #ДЛЯ VERCEL
 bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
 dp = Dispatcher(bot)
