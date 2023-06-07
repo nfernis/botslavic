@@ -7,7 +7,7 @@ import time
 import schedule
 import datetime
 
-bot = Bot(token='5948169074:AAGwiVPPIqbFhzwxYj9HnjukeFHyo4zWvW8')
+bot = Bot(token='token')
 dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 
